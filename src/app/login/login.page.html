@@ -1,9 +1,35 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title class="ion-text-center">
+      Login
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col>
+        <form (ngSubmit)="login()" [formGroup]="credentialsForm">
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" placeholder="Email" name="email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" placeholder="Password" name="password" formControlName="password"></ion-input>
+          </ion-item>
+
+          <div class="ion-padding">
+            <ion-button color="primary" expand="block" type="submit" [disabled]="!credentialsForm.valid">
+              Login
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

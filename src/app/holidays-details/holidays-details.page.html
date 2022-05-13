@@ -1,9 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>holidays-details</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Country detail</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ng-container *ngIf="!countryHollidays; else elseTemplate">
+    <div class="ion-text-center">
+      <ion-spinner></ion-spinner>
+      <h6>Please wait...</h6>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <ion-list>
+      <ion-item *ngFor='let country of countryHollidays | async'>
+        <ion-label>
+          <h3> {{country.date | date:'fullDate'}}</h3>
+          <p>Date: {{country.date | date:'fullDate'}}</p>
+          <p>{{country.local_name }}</p>
+          <p>{{ country.regions.join(',') }}</p>
+          <p>{{ country.types.join(',') }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding" *ngIf="(countryHollidays | async)?.length === 0">
+      <h3>No data for this country, please try other country GB</h3>
+    </div>
+  </ng-template>
 </ion-content>
