@@ -11,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'countries',
-    loadChildren: () => import('./countries/countries.module').then( m => m.CountriesPageModule),
+    loadChildren: () =>
+      import('./countries/countries.module').then((m) => m.CountriesPageModule),
     canActivate: [AuthenticationGuard],
   },
   //TODO: improve using children route
@@ -27,6 +28,12 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginPageModule),
+  },
+  {
+    path: 'movies',
+    loadChildren: () =>
+      import('./movies/movies.module').then((m) => m.MoviesPageModule),
+    canActivate: [AuthenticationGuard],
   },
   {
     path: '',

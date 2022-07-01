@@ -22,8 +22,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.credentialsForm = this.fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.minLength(6), Validators.required]],
+      email: ['manuel@code.com', [Validators.email, Validators.required]],
+      password: ['coding', [Validators.minLength(6), Validators.required]],
     });
   }
 
@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
     const respLogin = await this.auth.login(this.credentialsForm.value);
     loading.dismiss();
     if (respLogin) {
-      this.router.navigateByUrl('/countries', { replaceUrl: true });
+      this.router.navigateByUrl('/movies', { replaceUrl: true });
     } else {
       const alert = await this.alertCtrl.create({
         header: 'Error',

@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { MovieResponse } from '../movie-details/movie.model';
 
 export interface Country {
   code: string;
@@ -250,5 +251,18 @@ export class ApiService {
       );
       resolve(hollidays);
     });
+  }
+
+  /**
+   * Get movies by language
+   * @param apiKey
+   * @param language
+   * @returns
+   * TODO: improve can be implement handle observable error for async pipe
+   * https://eliteionic.com/tutorials/handle-errors-reactively-when-using-async-pipe/
+   */
+  getMovies(language: string = environment.lang): Observable<MovieResponse> {
+    const path = `${this.url}/movie/popular?language=${language}&api_key=${environment.apiKey}`;
+    return this.http.get<MovieResponse>(path);
   }
 }
