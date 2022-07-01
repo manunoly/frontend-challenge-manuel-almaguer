@@ -34,7 +34,7 @@ export class AuthService {
     if (token) {
       this.token = token;
       this.isAuthenticated.next(true);
-      this.router.navigateByUrl('/countries', { replaceUrl: true });
+      this.router.navigateByUrl('/movies', { replaceUrl: true });
     } else {
       this.isAuthenticated.next(false);
       this.router.navigateByUrl('/login', { replaceUrl: true });

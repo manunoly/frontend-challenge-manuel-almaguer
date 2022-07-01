@@ -1,0 +1,92 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Movies
+    </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="none" class="ion-text-end">
+    <ion-select slot="end" interface="popover" placeholder="Languaje" (ionChange)="loadMovies($event.detail.value)">
+      <ion-select-option value="en">English</ion-select-option>
+      <ion-select-option value="es">Español</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- ionn item aling end with selece  -->
+  <ion-item-divider color="primary" class="ion-text-center">
+    <ion-label>
+      My Movies
+    </ion-label>
+  </ion-item-divider>
+  <ng-container *ngIf="movies | async as moviesData; else elseTemplate">
+    <div *ngIf="!moviesData || moviesData?.results?.length === 0">
+      <ion-item>
+        <ion-label>
+          No movies found
+        </ion-label>
+      </ion-item>
+    </div>
+    <ion-list>
+      <ion-item *ngFor="let movie of moviesData.results; index as i" (click)="openMovie(movie)" [ngClass]="getColor(i)">
+        <!-- <ion-item> -->
+        <ion-label>
+          <ion-grid *ngIf="i === 0" class="ion-no-padding ion-text-wrap">
+            <ion-row>
+              <ion-col size="2">
+                <strong> Index </strong>
+              </ion-col>
+              <ion-col size="4">
+                <strong> Title </strong>
+              </ion-col>
+              <ion-col size="3">
+                <strong> Popularity </strong>
+              </ion-col>
+              <ion-col size="3">
+                <strong> Release Date </strong>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid class="ion-no-padding ion-text-wrap">
+            <ion-row class="ion-align-items-center">
+              <ion-col size="2">
+                {{i + 1}}
+              </ion-col>
+              <ion-col size="4">
+                {{movie.original_title}}
+              </ion-col>
+              <ion-col size="3">
+                {{movie.popularity}}
+              </ion-col>
+              <ion-col size="3">
+                {{movie.release_date | date: 'mm-dd-yyyy'}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <div class="ion-text-center ion-padding">
+      <ion-spinner> Loading ...</ion-spinner>
+    </div>
+  </ng-template>
+
+  <!-- <th>Index</th>
+  <th>Title</th>
+  <th>Popularity</th>
+  <th>Release date</th> -->
+
+</ion-content>

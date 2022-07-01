@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   token: '',
-  api: 'https://api.m3o.com/v1'
+  api: 'https://api.themoviedb.org/3',
+  lang: 'en',
+  apiKey: '748e2f2d238c8a8920e0bffd29bfd102',
 };
 
 /*
